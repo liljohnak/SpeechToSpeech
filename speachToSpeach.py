@@ -29,12 +29,13 @@ finally:
     recorder.delete()
 
 audio_file= open(path, "rb")
-transcript = openai.Audio.transcribe("whisper-1", audio_file)
+transcript = openai.Audio.transcribe("whisper-1", audio_file) #price: $0.006 / minute (rounded to the nearest second)
 language = 'en'
 myobj = gTTS(text = transcript.text, lang = language, slow = False)
 myobj.save(f"{path[:-4]}_exact.mp3")
-response = openai.Completion.create(
+response = openai.Completion.create(# price: $0.0200 / 1K tokens
   model="text-davinci-003",
+  #prompt="Correct this to standard English:\n\nShe no went to the market.",
   prompt=f"{transcript.text}\n\nTl;dr", # TL;DR summarization
   temperature=0.001,
   max_tokens=64,
