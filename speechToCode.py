@@ -9,7 +9,7 @@ from pynput import keyboard
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 audio_device = [index for index, _ in enumerate(PvRecorder.get_audio_devices())] # _ is a device name
-recorder = PvRecorder(device_index=0, frame_length=1024)
+recorder = PvRecorder(device_index=0, frame_length=512)
 audio = []
 random_uuid = uuid.uuid4()
 path = os.path.join(os.environ['USERPROFILE'], "Documents", "Sound recordings", f"CodeThis{str(random_uuid)[0:5]}.m4a")
