@@ -71,7 +71,7 @@ def on_release(key):
             transcript_without_punctuations = transcript.text.translate(str.maketrans('', '', string.punctuation))
             heard_words = transcript_without_punctuations.split()
             if word_in_list(heard_words, "command"): # " from the python arcpy object" " from minecraft" " from roblox"
-                SYSTEM_PROMPT = f"From now on, your response must be only using code, no talking, no comments."
+                SYSTEM_PROMPT = "From now on, your response must be only using code, no talking, no comments."
                 replacement_prompt = transcript.text
                 heard_words = bad_translation_to_word(heard_words)
                 if word_in_list(heard_words, "minecraft"):
@@ -80,8 +80,6 @@ def on_release(key):
                 elif word_in_list(heard_words, "roblox"):
                     heard_words = roblox_translation_to_word(heard_words)
                     replacement_prompt = " ".join(heard_words)
-                else:
-                    SYSTEM_PROMPT = "From now on, your response must be only using code, no talking, no comments."
                 command_prompt = f"{SYSTEM_PROMPT}\n\n{replacement_prompt}"
             elif len(heard_words) < 10:
                 command_prompt = transcript.text
